@@ -1,0 +1,16 @@
+{
+  "name": "jspm-registry",
+  "version": "0.1.0",
+  "description": "",
+  "main": "registry.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "rsvp": "^3.0.14",
+    "semver": "^4.0.3",
+    "rimraf": "^2.2.8"
+  }
+}
