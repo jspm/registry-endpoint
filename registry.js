@@ -24,7 +24,7 @@ var registry = module.exports = function registry(options, ui) {
   this.password = options.password;
 }
 
-registry.prototype.configure = function(config, ui) {
+registry.configure = function(config, ui) {
   return ui.input('Enter the registry repo path', config.repo || defaultRepo)
   .then(function(repo) {
     config.repo = repo;
