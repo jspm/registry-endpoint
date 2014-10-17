@@ -27,6 +27,11 @@ var registry = module.exports = function registry(options, ui) {
 registry.configure = function(config, ui) {
   return ui.input('Enter the registry repo path', config.repo || defaultRepo)
   .then(function(repo) {
+    if (repo.substr(0, 2) == '~/')
+      repo = path.resolve(process.env.HOME || process.env.USERPROFILE || process.env.HOMEPATH, repo.substr(2));
+    else if (repo.substr(0, 1) == '.')
+      repo = path.resolve(repo);
+
     config.repo = repo;
     return config;
   });
@@ -64,7 +69,7 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
   var overrideName = packageParts.pop();
   var overrideDir = path.resolve(this.registryPath, 'package-overrides', endpoint, packageParts.join('/'));
 
-  return Promise.resolve()
+  return this.updateRegistry()
   .then(function() {
     return asp(fs.readdir)(overrideDir);
   })
