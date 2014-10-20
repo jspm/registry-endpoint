@@ -53,7 +53,7 @@ registry.prototype.locate = function(repo) {
     var registryEntry = registry[repo];
 
     if (!registryEntry)
-      return { found: false };
+      return { notfound: true };
     
     return { redirect: registryEntry };
   });
