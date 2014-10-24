@@ -6,6 +6,12 @@ var semver = require('semver');
 var path = require('path');
 var rimraf = require('rimraf');
 
+function extend(a, b) {
+  for (var p in b)
+    a[p] = b[p];
+  return a;
+}
+
 var defaultRepo = 'https://github.com/jspm/registry.git';
 
 var registry = module.exports = function registry(options, ui) {
