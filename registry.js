@@ -192,19 +192,19 @@ registry.prototype.updateRegistry = function() {
       return self.createRegistry();
   })
   .then(function() {
-    return asp(fs.readFile)(path.resolve(registryPath, 'registry.json'));
-  })
-  .then(function(pjson) {
-    try {
-      return JSON.parse(pjson);
-    }
-    catch(e) {
-      return {};
-    }
-  }, function(err) {
-    if (err.code === 'ENOENT')
-      return {};
-    ui.log('warn', 'Registry file is invalid.');
+    return asp(fs.readFile)(path.resolve(registryPath, 'registry.json'))
+    .then(function(pjson) {
+      try {
+        return JSON.parse(pjson);
+      }
+      catch(e) {
+        return {};
+      }
+    }, function(err) {
+      if (err.code === 'ENOENT')
+        return {};
+      ui.log('warn', 'Registry file is invalid.');
+    });
   })
   .then(function(json) {
     return json;
