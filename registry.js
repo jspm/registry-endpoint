@@ -1,6 +1,6 @@
 var Promise = require('rsvp').Promise;
 var asp = require('rsvp').denodeify;
-var fs = require('fs');
+var fs = require('graceful-fs');
 var exec = require('child_process').exec;
 var semver = require('semver');
 var path = require('path');

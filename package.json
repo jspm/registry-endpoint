@@ -1,16 +1,26 @@
 {
   "name": "jspm-registry",
-  "version": "0.3.1",
-  "description": "",
+  "version": "0.3.2",
+  "description": "jspm registry and override endpoint",
   "main": "registry.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "Apache 2.0",
+  "license": "MIT",
   "dependencies": {
+    "graceful-fs": "^3.0.5",
+    "rimraf": "^2.2.8",
     "rsvp": "^3.0.14",
-    "semver": "^4.0.3",
-    "rimraf": "^2.2.8"
-  }
+    "semver": "^4.0.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jspm/registry-endpoint"
+  },
+  "bugs": {
+    "url": "https://github.com/jspm/registry-endpoint/issues"
+  },
+  "homepage": "https://github.com/jspm/registry-endpoint"
 }
