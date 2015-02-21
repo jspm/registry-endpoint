@@ -75,6 +75,8 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
   var overrideName = packageParts.pop();
   var overrideDir = path.resolve(this.registryPath, 'package-overrides', endpoint, packageParts.join('/'));
 
+  var ui = this.ui;
+
   return this.updateRegistry()
   .then(function() {
     return asp(fs.readdir)(overrideDir);
@@ -142,7 +144,8 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
 }
 
 registry.prototype.createRegistry = function() {
-  this.ui.log('info', 'Creating registry cache...');
+  var ui = this.ui;
+  ui.log('info', 'Creating registry cache...');
 
   var self = this;
 
