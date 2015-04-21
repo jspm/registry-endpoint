@@ -135,7 +135,7 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
   .then(function(override) {
     // if an existing override, let it extend this override
     if (givenOverride)
-      extend(override || {}, givenOverride);
+      extend(override = (override || {}), givenOverride);
     
     return override;
   });
