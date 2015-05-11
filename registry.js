@@ -60,7 +60,7 @@ registry.prototype.locate = function(repo) {
 
     if (!registryEntry)
       return { notfound: true };
-    
+
     return { redirect: registryEntry };
   });
 }
@@ -136,7 +136,7 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
     // if an existing override, let it extend this override
     if (givenOverride)
       extend(override = (override || {}), givenOverride);
-    
+
     return override;
   });
 }
@@ -184,6 +184,14 @@ registry.prototype.updateRegistry = function() {
     .then(function(stdout, stderr) {
       if (stderr)
         throw stderr;
+    })
+    .catch(function(err) {
+      if (typeof err == 'string') {
+        err = new Error(err);
+        err.hideStack = true;
+      }
+      err.retriable = true;
+      throw err;
     });
   }, function(err) {
     err = err.toString();
