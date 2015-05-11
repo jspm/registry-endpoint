@@ -23,8 +23,7 @@ var registry = module.exports = function registry(options, ui) {
   this.execOptions = {
     cwd: options.tmpDir,
     timeout: options.timeout * 1000,
-    killSignal: 'SIGKILL',
-    "strict-ssl": options.strictSSL
+    killSignal: 'SIGKILL'
   };
 
   this.username = options.username;
@@ -61,7 +60,7 @@ registry.prototype.locate = function(repo) {
 
     if (!registryEntry)
       return { notfound: true };
-
+    
     return { redirect: registryEntry };
   });
 }
@@ -137,7 +136,7 @@ registry.prototype.getOverride = function(endpoint, repo, version, givenOverride
     // if an existing override, let it extend this override
     if (givenOverride)
       extend(override = (override || {}), givenOverride);
-
+    
     return override;
   });
 }
@@ -181,20 +180,14 @@ registry.prototype.updateRegistry = function() {
 
     // if the registry does exist, update it
     ui.log('info', 'Updating registry cache...');
-    return asp(exec)('git fetch --all', execOptions)
+    return asp(exec)('git fetch --all && git reset --hard origin/master', execOptions)
     .then(function(stdout, stderr) {
       if (stderr)
         throw stderr;
-
-        return asp(exec)( 'git reset --hard origin/master', execOptions)
-          .then(function(stdout, stderr) {
-            console.log('made it');
-            if (stderr)
-              throw stderr;
-          })
     });
   }, function(err) {
     err = err.toString();
+
     // if the registry does not exist, do a git clone
     if (err.indexOf('Not a git repo') != -1)
       return self.createRegistry();
