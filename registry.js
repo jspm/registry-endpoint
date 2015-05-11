@@ -186,10 +186,9 @@ registry.prototype.updateRegistry = function() {
       if (stderr)
         throw stderr;
 
-        //Doing this as a second command instead of combined IE.(git fetch --all && git reset --hard origin/master) because
-        //it seems like the execOptions dont get passed to the git reset command if executed as part of a combination
         return asp(exec)( 'git reset --hard origin/master', execOptions)
           .then(function(stdout, stderr) {
+            console.log('made it');
             if (stderr)
               throw stderr;
           })
