@@ -59,7 +59,8 @@ registry.prototype.locate = function(repo) {
     var registryEntry = registry[repo];
 
     if (!registryEntry)
-      return { redirect: 'npm:' + repo };
+      return { notfound: true };
+
     return { redirect: registryEntry };
   });
 }
