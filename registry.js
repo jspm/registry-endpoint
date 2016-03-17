@@ -152,7 +152,10 @@ registry.prototype.createRegistry = function() {
     return asp(fs.mkdir)(path.resolve(self.registryPath));
   })
   .then(function() {
-    return asp(exec)('git clone --depth=1 ' + self.repo + ' .', self.execOptions);
+    // Default windows shell doesn't support UNC paths => escape it
+    var repo = self.repo;
+    if (process.platform == 'win32' && (/^[\\\/]{2,}[^\\\/]+[\\\/]+[^\\\/]+/).test(repo)) repo = repo.replace(/\\/, '/');
+    return asp(exec)('git clone --depth=1 ' + repo + ' .', self.execOptions);
   })
   .catch(function(err) {
     ui.log('err', 'Error creating registry file\n' + (err.stack || err));
