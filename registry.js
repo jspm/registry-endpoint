@@ -154,7 +154,7 @@ registry.prototype.createRegistry = function() {
   .then(function() {
     // Default windows shell doesn't support UNC paths => escape it
     var repo = self.repo;
-    if (process.platform == 'win32' && (/^[\\\/]{2,}[^\\\/]+[\\\/]+[^\\\/]+/).test(repo)) repo = repo.replace(/\\/, '/');
+    if (process.platform == 'win32' && (/^[\\\/]{2,}[^\\\/]+[\\\/]+[^\\\/]+/).test(repo)) repo = repo.replace(/\\/g, '/');
     return asp(exec)('git clone --depth=1 ' + repo + ' .', self.execOptions);
   })
   .catch(function(err) {
