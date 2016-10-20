@@ -200,7 +200,7 @@ registry.prototype.updateRegistry = function() {
     err = err.toString();
 
     // if the registry does not exist, do a git clone
-    if (err.indexOf('Not a git repo') != -1)
+    if (err.indexOf('.git') != -1)
       return self.createRegistry();
   })
   .then(function() {
