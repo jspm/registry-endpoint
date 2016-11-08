@@ -197,11 +197,11 @@ registry.prototype.updateRegistry = function() {
       throw err;
     });
   }, function(err) {
-    err = err.toString();
-
     // if the registry does not exist, do a git clone
-    if (err.indexOf('.git') != -1)
+    if (err.toString().indexOf('fatal:') != -1)
       return self.createRegistry();
+
+    throw err;
   })
   .then(function() {
     return asp(fs.readFile)(path.resolve(registryPath, 'registry.json'))
@@ -222,6 +222,3 @@ registry.prototype.updateRegistry = function() {
     return json;
   });
 }
-
-
-
